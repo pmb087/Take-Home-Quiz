@@ -1,2 +1,12 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+  import { goto } from '$app/navigation';
+  import { browser } from '$app/environment';
+
+  $: if (browser) {
+    goto('/ko/categories',{replaceState:true});
+  }
+</script>
+
+<svelte:head>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</svelte:head>
