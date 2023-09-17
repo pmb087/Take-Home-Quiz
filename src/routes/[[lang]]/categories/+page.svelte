@@ -36,7 +36,7 @@
 <div class="category-wrap">
   {#each fetchedData as item (item.id)}
     <button class="category-single" on:click={() => goToProducts(item.name)}>
-        <img class="category-image" src={item.picture} alt="category"/>
+        <img class="category-image" src={item.picture + `?cache=${Math.floor(Math.random() * 100)}`} alt="category"/>
         <span class="category-name">{item.name}</span>
     </button>
   {/each}

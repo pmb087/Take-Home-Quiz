@@ -55,7 +55,7 @@
     {#each productsData as item (item.id)}
       <div class="product-single">
         {#if item.picture}
-          <img class="product-image" src={item.picture} alt="product"/>
+          <img class="product-image" src={item.picture + `?cache=${Math.floor(Math.random() * 100)}`} alt="product"/>
         {:else}
           <div class="skelleton-image">
             <p class="inner-skelleton">{item.name}</p>
