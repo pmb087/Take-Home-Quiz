@@ -1,12 +1,14 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { page } from "$app/stores";
+  import { goto } from "$app/navigation";
 
   interface categoryData {
       id: string;
       name: string;
       picture: string;
       productOrder: string;
-      description: string | undefined;
+      description?: string;
     }
 
   interface categoriesData {
@@ -22,15 +24,18 @@
     fetchedData = newData;
   });
 
-  const test = (item: categoryData) => {
-    console.log(item.name)
+  const goToProducts = (name: string) => {
+    const { lang } = $page.params;
+    const destinationUrl = `/${lang}/products/${name}`;
+
+    goto(destinationUrl);
   }
 
 </script>
 
 <div class="category-wrap">
   {#each fetchedData as item (item.id)}
-    <button class="category-single" on:click={() => test(item)}>
+    <button class="category-single" on:click={() => goToProducts(item.name)}>
         <img class="category-image" src={item.picture} alt="category"/>
         <span class="category-name">{item.name}</span>
     </button>
