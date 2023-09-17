@@ -11,13 +11,13 @@
   let languagesData: string[] = [];
   let isToggled = false;
   let currentTableNumber: number = 0;
+  let currentLang: string = "";
 
   const callWaiter = () => {
     alert("Waiter Called");
   };
 
   const clickLanguages = () => {
-    console.log("clicked")
     isToggled = !isToggled;
   }
 
@@ -34,6 +34,9 @@
     if(url.pathname === destinationUrl) return;
 
     goto(destinationUrl);
+
+    if($page.params.lang === "ko") currentLang = "English";
+    else if($page.params.lang === "en") currentLang = "한국어";
   }
 
   onMount ( async () => {
@@ -46,13 +49,16 @@
     const dataB: string = await responseB.json();
     const newDataB = Number(dataB);
     currentTableNumber = newDataB;
+    
+    if($page.params.lang === "ko") currentLang = "한국어";
+    else if($page.params.lang === "en") currentLang = "English";
   });
 
 </script>
 
 <header class="quiz-header">
   <button class="quiz-header-menu lang-change btn-style-remove" on:click={clickLanguages}>
-    English
+    {currentLang}
     <img class="change-lang-emoji" src="/chevron-down.png" alt="change language" />
     {#if languagesData.length > 0 && isToggled}
       <div class="languages-change-toggle-container">
