@@ -1,0 +1,1 @@
+export const languages = [{name: 'English'}, {name: '한국어'}];
